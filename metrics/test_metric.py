@@ -38,4 +38,6 @@ class TestMetric(BaseMetric):
 
         print(df)
 
+        ciao capo, il codice è in errore!
+
         return df['TestIndex']
