@@ -18,7 +18,7 @@ class PuellMetric(BaseMetric):
     def description(self) -> str:
         return 'Puell Multiple'
 
-    def _calculate(self, df: pd.DataFrame, ax: list[plt.Axes]) -> pd.Series:
+    def _calculate(self, df: pd.DataFrame, ax: list) -> pd.Series:
         df = df.merge(lib_fetch(
             url_selector='puell_multiple',
             post_selector='puell_multiple',

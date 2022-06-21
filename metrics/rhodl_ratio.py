@@ -22,7 +22,7 @@ class RHODLMetric(BaseMetric):
     def description(self) -> str:
         return 'RHODL Ratio'
 
-    def _calculate(self, df: pd.DataFrame, ax: list[plt.Axes]) -> pd.Series:
+    def _calculate(self, df: pd.DataFrame, ax: list) -> pd.Series:
         try:
             remote_df = lib_fetch(
                 url_selector='rhodl_ratio',

@@ -138,7 +138,7 @@ class GoogleTrendsMetric(BaseMetric):
 
         return np.interp(scaled, (0, 1), (self._hybrid_separator, 1))
 
-    def _calculate(self, df: pd.DataFrame, ax: list[plt.Axes]) -> pd.Series:
+    def _calculate(self, df: pd.DataFrame, ax: list) -> pd.Series:
         keyword = 'Bitcoin'
         days_shift = ma_days = 5
         max_change_skip_head = 1000

@@ -74,7 +74,7 @@ def mark_highs_lows(
     return df
 
 
-def mark_days_since(df: pd.DataFrame, cols: list[str]) -> pd.DataFrame:
+def mark_days_since(df: pd.DataFrame, cols: list) -> pd.DataFrame:
     for col in cols:
         indexes = df.loc[df[col] == 1].index
         df[f'DaysSince{col}'] = df.index \
@@ -101,7 +101,7 @@ def add_common_markers(df: pd.DataFrame, ax: plt.Axes, price_line: bool = True):
         ax.axvline(x=days_since_epoch, color='red', linestyle=':')
 
 
-def split_df_on_index_gap(df: pd.DataFrame, min_gap: int = 1) -> list[pd.DataFrame]:
+def split_df_on_index_gap(df: pd.DataFrame, min_gap: int = 1) -> list:
     begin_idx = None
     end_idx = None
 

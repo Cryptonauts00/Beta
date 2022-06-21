@@ -17,7 +17,7 @@ class RUPLMetric(BaseMetric):
     def description(self) -> str:
         return 'RUPL/NUPL Chart'
 
-    def _calculate(self, df: pd.DataFrame, ax: list[plt.Axes]) -> pd.Series:
+    def _calculate(self, df: pd.DataFrame, ax: list) -> pd.Series:
         df = df.merge(lib_fetch(
             url_selector='unrealised_profit_loss',
             post_selector='relative-unrealized-profit--loss',

@@ -18,7 +18,7 @@ class TwoYearMovingAverageMetric(BaseMetric):
     def description(self) -> str:
         return '2 Year Moving Average'
 
-    def _calculate(self, df: pd.DataFrame, ax: list[plt.Axes]) -> pd.Series:
+    def _calculate(self, df: pd.DataFrame, ax: list) -> pd.Series:
         df = df.merge(lib_fetch(
             url_selector='market_cycle_ma',
             post_selector='bitcoin-investor-tool',

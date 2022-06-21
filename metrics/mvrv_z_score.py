@@ -18,7 +18,7 @@ class MVRVMetric(BaseMetric):
     def description(self) -> str:
         return 'MVRV Z-Score'
 
-    def _calculate(self, df: pd.DataFrame, ax: list[plt.Axes]) -> pd.Series:
+    def _calculate(self, df: pd.DataFrame, ax: list) -> pd.Series:
         bull_days_shift = 6
         low_model_adjust = 0.26
 

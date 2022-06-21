@@ -24,25 +24,30 @@ from metrics.rupl import RUPLMetric
 from metrics.trolololo import TrolololoMetric
 from metrics.two_year_moving_average import TwoYearMovingAverageMetric
 from metrics.woobull_topcap_cvdd import WoobullMetric
+
+#test 
+from metrics.test_metric import TestMetric
+
 from utils import format_percentage, get_color
 
 
-def get_metrics() -> list[BaseMetric]:
+def get_metrics() -> list:
     return [
-        PiCycleMetric(),
-        RUPLMetric(),
-        RHODLMetric(),
+        #PiCycleMetric(),
+        #RUPLMetric(),
+        #RHODLMetric(),
         PuellMetric(),
-        TwoYearMovingAverageMetric(),
-        TrolololoMetric(),
-        MVRVMetric(),
+        #TwoYearMovingAverageMetric(),
+        #TrolololoMetric(),
+        #MVRVMetric(),
         ReserveRiskMetric(),
-        WoobullMetric(),
-        GoogleTrendsMetric(),
+        #WoobullMetric(),
+        #GoogleTrendsMetric(),
+        TestMetric()
     ]
 
 
-def calculate_confidence_score(df: pd.DataFrame, cols: list[str]) -> pd.Series:
+def calculate_confidence_score(df: pd.DataFrame, cols: list) -> pd.Series:
     return df[cols].mean(axis=1)
 
 
@@ -90,6 +95,7 @@ def run(json_file: str,
     plt.tight_layout(pad=14)
 
     for metric, ax in zip(metrics, axes):
+
         df_bitcoin[metric.name] = metric.calculate(df_bitcoin_org.copy(), ax).clip(0, 1)
         metrics_cols.append(metric.name)
         metrics_descriptions.append(metric.description)
@@ -100,8 +106,13 @@ def run(json_file: str,
     confidence_col = 'Confidence'
 
     df_result = pd.DataFrame(df_bitcoin[['Date', 'Price'] + metrics_cols])
+
     df_result.set_index('Date', inplace=True)
     df_result[confidence_col] = calculate_confidence_score(df_result, metrics_cols)
+
+    print("DF RESULT:")
+    print(df_result)
+
     df_result \
         .to_json(json_file_path,
                  double_precision=4,
@@ -109,6 +120,10 @@ def run(json_file: str,
                  indent=2)
 
     df_result_last = df_result.tail(1)
+
+    print("DF RESULT LAST:")
+    print(df_result_last)
+
     confidence_details = {description: df_result_last[name][0]
                           for name, description in
                           zip(metrics_cols, metrics_descriptions)}
@@ -126,10 +141,7 @@ def run(json_file: str,
             print(fg.white + get_color(value) + f'{format_percentage(value)} ' + rs.all, end='')
             print(f' - {description}')
 
-    print()
-    print('Source code: ' + ef.u + fg.li_blue + 'https://github.com/Zaczero/CBBI' + rs.all)
-    print('License: ' + ef.b + 'AGPL-3.0' + rs.all)
-    print()
+    #print('\nSource code: ' + ef.u + fg.li_blue + 'https://github.com/Zaczero/CBBI' + rs.all + '\n')
 
 
 def run_and_retry(json_file: str = 'latest.json',

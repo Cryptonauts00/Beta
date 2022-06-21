@@ -34,8 +34,12 @@ def lib_fetch(
         timeout=HTTP_TIMEOUT)
     response.raise_for_status()
     response_json = response.json()
-    response_x = response_json['response']['chart']['figure']['data'][chart_idx]['x']
-    response_y = response_json['response']['chart']['figure']['data'][chart_idx]['y']
+    
+    #print("PRINTING RESPONSE")
+    #print(response_json['response'])
+    
+    response_x = response_json['response']["chart"]['figure']['data'][chart_idx]['x']
+    response_y = response_json['response']["chart"]['figure']['data'][chart_idx]['y']
 
     df = pd.DataFrame({
         'Date': response_x[:len(response_y)],

@@ -21,7 +21,7 @@ class BaseMetric(ABC):
         pass
 
     @abstractmethod
-    def _calculate(self, df: pd.DataFrame, ax: list[plt.Axes]) -> pd.Series:
+    def _calculate(self, df: pd.DataFrame, ax: list) -> pd.Series:
         pass
 
     def _fallback(self, df: pd.DataFrame) -> pd.Series:
@@ -30,7 +30,7 @@ class BaseMetric(ABC):
 
         return df['Value']
 
-    def calculate(self, df: pd.DataFrame, ax: list[plt.Axes]) -> pd.Series:
+    def calculate(self, df: pd.DataFrame, ax: list) -> pd.Series:
         try:
             return self._calculate(df, ax)
         except Exception as ex:
